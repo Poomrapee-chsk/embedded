@@ -85,9 +85,9 @@ while True:
             print("Received frame data")
             received_data.extend(data)
         
-        name = f'output_frame_{now}.bin'
-        with open(name, 'wb') as f:
-            f.write(received_data)
+        # name = f'output_frame_{now}.bin'
+        # with open(name, 'wb') as f:
+        #     f.write(received_data)
         if len(received_data) == frame_size:
             # Convert the frame data to RGB888
             rgb888_data = rgb565_to_rgb888(received_data, frame_width, frame_height, 0xFF)
