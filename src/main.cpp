@@ -5,6 +5,8 @@
 #include <driver/ledc.h>
 #include <PubSubClient.h>
 #include "DHT.h"
+#include "soc/soc.h"
+#include "soc/rtc_cntl_reg.h"
 
 // Humidity and temperature sensor
 #define DHTPIN 23
@@ -83,7 +85,6 @@ void initWifiStation()
     Serial.print(".");
   }
   Serial.println(String("\nConnected to the WiFi network (") + ssid1 + ")");
-  digitalWrite(RELAY, 1);
   Serial.print("\nStation IP address: ");
   Serial.println(WiFi.localIP());
 }
@@ -188,7 +189,7 @@ void callback(char *topic, byte *payload, unsigned int length)
   
   Serial.println(message);
 
-  if (String(topic) == "@msg/IR")
+  if (String(topic) == "@msg/IR" && lightStatus == 0)
   {
     String data = "on";
     data.toCharArray(msg, data.length() + 1);
@@ -229,6 +230,8 @@ void setup()
   Serial.println("Camera initialized");
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
+  pinMode(RELAY, OUTPUT);
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable detector
 
   if (client.connected()) {
     Serial.print("Client has been connected");
@@ -256,7 +259,7 @@ void setup()
   //     0                 // Core to run the task on (0 = CPU0)
   // );
 
-  dht.begin();
+ dht.begin();
 }
 
 void loop()
