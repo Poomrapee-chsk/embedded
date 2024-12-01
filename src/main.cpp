@@ -18,12 +18,12 @@ const int RELAY = 19;
 // Netpie
 const char *mqtt_server = "broker.netpie.io";
 const int mqtt_port = 1883;
-const char *mqtt_Client = "1428f47f-fe35-4010-8537-ac411a92ef51";
-const char *mqtt_username = "PS42qjzn1vjEehJUAPMjqW1jCx65F5te";
-const char *mqtt_password = "bGBwRE8JmkC4eBJfcDhn3PSUypjNzSmq";
+const char *mqtt_Client = "";
+const char *mqtt_username = "";
+const char *mqtt_password = "";
 
-const char *ssid1 = "wePresent1738";
-const char *password1 = "itsgoogle!";
+const char *ssid1 = "";
+const char *password1 = "";
 
 const int SIOD = 21; // SDA
 const int SIOC = 22; // SCL
